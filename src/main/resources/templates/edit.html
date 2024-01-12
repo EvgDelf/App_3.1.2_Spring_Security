@@ -9,8 +9,8 @@
 <form action="#" th:action="@{/admin/user/{id}/edit(id=${user.id})}" th:object="${user}" method="post">
     <div>
         <label for="name">First Name:</label>
-        <input type="text" id="name" th:field="*{name}">
-        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{name}"></span>
+        <input type="text" id="name" th:field="*{username}">
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{username}"></span>
     </div>
     <div>
         <label for="lastName">Last Name:</label>

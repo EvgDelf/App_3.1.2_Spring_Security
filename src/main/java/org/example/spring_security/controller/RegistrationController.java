@@ -1,7 +1,6 @@
 package org.example.spring_security.controller;
 
 import org.example.spring_security.model.User;
-import org.example.spring_security.repository.UserRepository;
 import org.example.spring_security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RegistrationController {
+
     private final UserService userService;
 
     @Autowired
@@ -21,16 +21,14 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration")
-    public String showRegistrationForm(Model model) {
+    public String registerForm(Model model) {
         model.addAttribute("user", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String processRegistrationForm(@RequestParam("login") String login,@RequestParam("password") String password,
-                                          @RequestParam("name") String firstName, @RequestParam("lastName") String lastName,
-                                          @RequestParam("age") int age, @RequestParam("email") String email) {
-        userService.registerUser(login,password,firstName,lastName,age,email);
+    public String registration (@ModelAttribute("user") User user) {
+        userService.registerUser(user);
         return "redirect:/login";
     }
 
