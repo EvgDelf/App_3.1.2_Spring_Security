@@ -1,5 +1,6 @@
 package org.example.spring_security.controller;
 
+import org.example.spring_security.model.User;
 import org.example.spring_security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
+
     private final UserService userService;
 
     @Autowired
@@ -18,8 +20,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUserPage(Model model, @RequestParam("id") Long id) {
+    public String userPage(@RequestParam("id") Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "user";
     }
+
 }

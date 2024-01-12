@@ -1,13 +1,18 @@
 package org.example.spring_security.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.core.GrantedAuthority;
+
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity(name = "role")
+@EntityScan
 public class Role implements GrantedAuthority {
 
     @Id
@@ -16,14 +21,11 @@ public class Role implements GrantedAuthority {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private Set<User> users = new HashSet<User>();
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+    private List<User> users = new LinkedList<User>();
 
     @Override
     public String getAuthority() {
-        return getName();
+        return this.name;
     }
 }

@@ -13,9 +13,14 @@
         <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
     </div>
     <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" th:field="*{name}">
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    </div>
+    <div>
+        <label for="username">Name:</label>
+        <input type="text" id="username" th:field="*{username}">
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
     </div>
     <div>
         <label for="lastName">Last Name:</label>
@@ -31,11 +36,6 @@
         <label for="email">Email:</label>
         <input type="email" id="email" th:field="*{email}">
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}">
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
     </div>
     <button type="submit">Register</button>
 </form>
