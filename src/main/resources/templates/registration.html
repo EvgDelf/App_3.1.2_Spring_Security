@@ -6,12 +6,7 @@
 </head>
 <body>
 <h2>Registration</h2>
-<form action="#" th:action="@{/registration}" th:object="${user}" method="post">
-    <div>
-        <label for="login">Login:</label>
-        <input type="text" id="login" th:field="*{login}">
-        <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
-    </div>
+<form action="#" th:action="@{/register}" th:object="${user}" method="post">
     <div>
         <label for="password">Password:</label>
         <input type="password" id="password" th:field="*{password}">

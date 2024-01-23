@@ -6,14 +6,14 @@ import org.example.spring_security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
-
 
     private final UserService userService;
 
@@ -22,47 +22,37 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/admin")
     public String findAll(Model model) {
         model.addAttribute("users", userService.findAll());
         return "users";
     }
 
-    @GetMapping("/user/{id}")
-    public String findUserById (@RequestParam ("id") Long id) {
+    @GetMapping("/admin/user")
+    public String findUserById(@RequestParam("id") Long id, Model model) {
         User user = userService.findById(id);
         userService.findById(id);
-        return "/user" + user.getId();
+        model.addAttribute("user", user);
+        return "user";
     }
 
-    @PostMapping("/user-delete")
-    public String deleteUser(@RequestParam("id") Long id){
+    @PostMapping("/admin/user-delete")
+    public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteById(id);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
-    @PostMapping("/addRole")
-    public String addRole(@RequestParam("id") Long id) {
-        userService.addRole(id);
-        return "redirect:/users";
-    }
-
-    @PostMapping("/deleteRole")
-    public String deleteRole(@RequestParam("id") Long id) {
-        userService.deleteRole(id);
-        return "redirect:/users";
-    }
-
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit")
     public String editForm(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
         return "edit";
     }
 
-    @PostMapping("/edit")
-    public String editUser(@RequestParam ("id") Long id, @RequestParam("user") User user) {
-        userService.edit(id, user);
-        return "redirect:/users";
+    @PostMapping("/admin/edit")
+    public String editUser(@ModelAttribute("user") User user) {
+        userService.edit(user);
+        return "redirect:/admin";
     }
 
 
