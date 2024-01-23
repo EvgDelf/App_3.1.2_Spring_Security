@@ -3,10 +3,8 @@ package org.example.spring_security.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity(name = "role")
@@ -17,6 +15,9 @@ public class Role implements GrantedAuthority {
     private Long id;
 
     private String name;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
     @Override
     public String getAuthority() {
