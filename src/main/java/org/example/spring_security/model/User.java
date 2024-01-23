@@ -1,5 +1,6 @@
 package org.example.spring_security.model;
 
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -112,9 +113,15 @@ public class User implements UserDetails {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         this.password = bCryptPasswordEncoder.encode(password);
     }
+    @PostLoad
+    public void loadRoles() {
+        Hibernate.initialize(roles);
+    }
 
     public List<Role> getRoles() {
+
         return roles;
+
     }
 
     public void setRoles(List<Role> roles) {

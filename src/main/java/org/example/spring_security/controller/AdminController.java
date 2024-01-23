@@ -31,7 +31,6 @@ public class AdminController {
     @GetMapping("/admin/user")
     public String findUserById(@RequestParam("id") Long id, Model model) {
         User user = userService.findById(id);
-        userService.findById(id);
         model.addAttribute("user", user);
         return "user";
     }

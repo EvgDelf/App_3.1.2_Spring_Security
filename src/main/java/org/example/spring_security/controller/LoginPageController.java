@@ -1,9 +1,6 @@
 package org.example.spring_security.controller;
 
 
-import org.example.spring_security.repository.RoleRepository;
-import org.example.spring_security.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -18,14 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginPageController {
 
-    private final UserService userService;
-    private final RoleRepository roleRepository;
-
-    @Autowired
-    public LoginPageController(UserService userService, RoleRepository roleRepository) {
-        this.userService = userService;
-        this.roleRepository = roleRepository;
-    }
 
     @GetMapping("/app")
     public String loginPage(Model model) {
